@@ -29,7 +29,7 @@
 // https://www.cryptopp.com/wiki/Release_Process#Self_Tests
 // The problems with Clang pretending to be other compilers is
 // discussed at http://github.com/weidai11/cryptopp/issues/147.
-#if (defined(_MSC_VER) && defined(__clang__))
+#if (defined(_MSC_VER) && _MSC_VER < 1930 && defined(__clang__))
 # error: "Unsupported configuration"
 #endif
 
@@ -126,6 +126,7 @@
 #endif
 
 #ifdef CRYPTOPP_WIN32_AVAILABLE
+#include <winapifamily.h>
 # if !defined(WINAPI_FAMILY)
 #	define THREAD_TIMER_AVAILABLE
 # elif defined(WINAPI_FAMILY)
