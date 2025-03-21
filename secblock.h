@@ -270,7 +270,7 @@ public:
 	/// \details VS.NET STL enforces the policy of "All STL-compliant allocators
 	///  have to provide a template class member called rebind".
     template <class V> struct rebind { typedef AllocatorWithCleanup<V, T_Align16> other; };
-#if (CRYPTOPP_MSC_VERSION >= 1500) || (defined(CRYPTOPP_MSC_VERSION) && defined(__clang__))
+#if defined(__clang__) && !defined(CRYPTOPP_MSC_VERSION)
 	AllocatorWithCleanup() {}
 	template <class V, bool A> AllocatorWithCleanup(const AllocatorWithCleanup<V, A> &) {}
 #endif
